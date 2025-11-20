@@ -52,7 +52,7 @@ Ou baixe o ZIP e extraia.
 
 ## 📸 Capturas de Tela
 
-```
+
 ![GIF-JOGO-MACA2](https://github.com/user-attachments/assets/6409c435-6bb2-4388-b17e-1497bf0b839d)
 
 <img width="1919" height="1015" alt="Captura de tela 2025-11-20 191731" src="https://github.com/user-attachments/assets/55c3b0bc-bb5e-4608-a3fe-e7af29b5a251" />
@@ -60,6 +60,6 @@ Ou baixe o ZIP e extraia.
 <img width="1918" height="1017" alt="Captura de tela 2025-11-20 191817" src="https://github.com/user-attachments/assets/f8b85ffb-cf4b-4c11-b59d-d1be4ceaa3aa" />
 
 
-```
+
 
 
