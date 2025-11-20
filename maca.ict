@@ -1,0 +1,1057 @@
+ctjsVersion: 5.2.1
+backups: 3
+language: typescript
+notes: |-
+  let apple = templates.list['apple'][0];
+  if (this.x > apple.x) {
+  this.x -= 8;
+  } else {
+      this.x += 8
+  }
+
+  if (som = ){
+      
+  }
+
+  if (rooms.current.lives == 0) {
+      sounds.play('dead')
+  }
+libs:
+  place:
+    gridX: 1024
+    gridY: 1024
+    debugMode: false
+    debugText: 0
+  keyboard: {}
+  keyboard.polyfill: {}
+  pointer.polyfill: {}
+  random: {}
+  vkeys: {}
+  pointer:
+    startlocked: false
+startroom: djWQmfK9zp1jgk
+contentTypes: []
+actions:
+  - name: mouse
+    methods:
+      - code: pointer.Any
+scripts: []
+assets:
+  - lastmod: 1763337237366
+    type: texture
+    name: Apple-PNG-File
+    untill: 0
+    grid:
+      - 1
+      - 1
+    axis:
+      - 499.85714285714283
+      - 477.17857142857144
+    marginx: 0
+    marginy: 0
+    imgWidth: 1024
+    imgHeight: 1024
+    width: 1024
+    height: 1024
+    offx: 0
+    offy: 0
+    origname: ifpGkq8cnn351Gd.png
+    shape: rect
+    left: 499
+    right: 525
+    top: 477
+    bottom: 547
+    uid: fpGkq8cnn351Gd
+    padding: 1
+    isBlank: false
+    source: 'C:\Users\vhque\Downloads\maca.png'
+    r: 245
+    stripPoints:
+      - x: 0
+        'y': -245
+      - x: 238
+        'y': -76
+      - x: 147
+        'y': 198
+      - x: -147
+        'y': 198
+      - x: -238
+        'y': -76
+    closedStrip: true
+  - lastmod: 1725662396216
+    type: texture
+    name: Basket-PNG-Transparent-HD-Photo
+    untill: 0
+    grid:
+      - 1
+      - 1
+    axis:
+      - 1100
+      - 2075.4883720930234
+    marginx: 0
+    marginy: 0
+    imgWidth: 2201
+    imgHeight: 2260
+    width: 2201
+    height: 2260
+    offx: 0
+    offy: 0
+    origname: i5jtT8HrN6QzKpc.png
+    shape: rect
+    left: 1100
+    right: 1117
+    top: 981
+    bottom: 1130
+    uid: 5jtT8HrN6QzKpc
+    padding: 1
+    isBlank: false
+    source: /home/kayronn/Downloads/Basket-PNG-Transparent-HD-Photo.png
+    r: 1100
+    stripPoints:
+      - x: 44.83018867924528
+        'y': 424.1132075471699
+      - x: 1161.566037735849
+        'y': -383.8679245283019
+      - x: 836.2830188679245
+        'y': 804.4150943396227
+      - x: -776.5094339622642
+        'y': 819.3584905660377
+      - x: -1047
+        'y': -349
+    closedStrip: true
+    symmetryStrip: false
+  - type: template
+    baseClass: AnimatedSprite
+    name: maca
+    depth: 0
+    texture: fpGkq8cnn351Gd
+    playAnimationOnStart: false
+    loopAnimation: true
+    animationFPS: 30
+    visible: true
+    events:
+      - eventKey: OnStep
+        lib: core
+        code: |-
+          console.log(rooms.current.lives);
+          this.move ()
+        arguments: {}
+      - eventKey: OnCreate
+        code: |-
+          this.direction = 90;//direção para onde vai deslizar
+          this.x = random.range(65, 1216); //spawn aleatorio
+          this.speed = 500;//velocidade de movimento
+        arguments: {}
+        lib: core
+      - eventKey: collisionTemplate
+        code: >-
+          this.x = random.range(65, 1216) //spawn aleatorio
+
+          this.y = -64
+
+          rooms.current.score += 1; //quando colidir ganhar mais ponto
+
+          console.log(rooms.current.score);
+
+          this.speed += 10; //aumenta a velocidade em 10 quando colidir
+
+          sounds.play('maca');
+
+          if (rooms.current.score == 10 ||rooms.current.score == 20
+          ||rooms.current.score == 30 ||rooms.current.score == 40
+          ||rooms.current.score == 50 ||rooms.current.score == 60
+          ||rooms.current.score == 70 ||rooms.current.score == 80
+          ||rooms.current.score == 90 ||rooms.current.score == 100
+          ||rooms.current.score == 110 ||rooms.current.score == 120
+          ||rooms.current.score == 130 ||rooms.current.score == 140
+          ||rooms.current.score == 150 ||rooms.current.score == 160
+          ||rooms.current.score == 170 ||rooms.current.score == 180
+          ||rooms.current.score == 190 ||rooms.current.score == 200 ) {
+              sounds.play('isso')
+          }
+        arguments:
+          template: nrqkwTTP4ffGWg
+        lib: place
+      - eventKey: OnDraw
+        code: |-
+          if (this.y > 768) { //quando chegar no y -64 morre
+              this.kill = true;
+              sounds.play('dead')
+              rooms.current.lives = 0;
+          };
+        arguments: {}
+        lib: core
+    extends:
+      cgroup: ''
+    lastmod: 1763337063795
+    uid: bf1WDHf3WjqzKc
+    behaviors: []
+    extendTypes: ''
+  - type: template
+    baseClass: AnimatedSprite
+    name: cesta
+    depth: 0
+    texture: 5jtT8HrN6QzKpc
+    playAnimationOnStart: false
+    loopAnimation: true
+    animationFPS: 30
+    visible: true
+    events:
+      - eventKey: OnStep
+        lib: core
+        code: |
+          //seguir o mouse X
+          this.x = pointer.x;
+        arguments: {}
+    extends:
+      cgroup: ''
+    lastmod: 1763337103112
+    uid: nrqkwTTP4ffGWg
+    behaviors: []
+    extendTypes: ''
+  - type: room
+    oncreate: ''
+    onstep: ''
+    ondraw: ''
+    onleave: ''
+    gridX: 64
+    gridY: 64
+    diagonalGrid: false
+    disableGrid: false
+    simulate: true
+    width: 1280
+    height: 720
+    restrictCamera: false
+    restrictMaxX: 1280
+    restrictMinX: 1280
+    restrictMaxY: 720
+    restrictMinY: 720
+    isUi: false
+    name: jogo
+    backgroundColor: '#000000'
+    follow: -1
+    backgrounds:
+      - depth: 0
+        texture: nwmcppGkGgkLkt
+        shiftX: 0
+        shiftY: 0
+        parallaxX: 1
+        parallaxY: 1
+        movementX: 0
+        movementY: 0
+        scaleX: 1.1
+        scaleY: 1.1
+        repeat: no-repeat
+    copies:
+      - x: 674.69799533
+        'y': 654.4298769
+        opacity: 1
+        tint: 16777215
+        scale:
+          x: 0.08723308
+          'y': 0.06076695
+        rotation: 0
+        uid: nrqkwTTP4ffGWg
+        exts: {}
+        customProperties: {}
+        bindings: {}
+      - x: 672
+        'y': 90.5000004
+        opacity: 1
+        tint: 16777215
+        scale:
+          x: 0.128
+          'y': 0.10816327
+        rotation: 0
+        uid: bf1WDHf3WjqzKc
+        exts: {}
+        customProperties: {}
+        bindings: {}
+      - x: 0
+        'y': 0
+        opacity: 1
+        tint: 16777215
+        scale:
+          x: 1
+          'y': 1
+        rotation: 0
+        uid: QLzqHC6t66JwqH
+        exts: {}
+        customProperties: {}
+        bindings: {}
+      - x: 512
+        'y': 768
+        opacity: 1
+        tint: 16777215
+        scale:
+          x: 1
+          'y': 1
+        rotation: 0
+        uid: TGg9mGqHw2fm5b
+        exts: {}
+        customProperties: {}
+        bindings: {}
+      - x: 384
+        'y': 896
+        opacity: 1
+        tint: 16777215
+        scale:
+          x: 1.51032448
+          'y': 1.93939394
+        rotation: 0
+        uid: M1qw88b1R4m44t
+        exts: {}
+        customProperties: {}
+        bindings: {}
+    tiles: []
+    extends: {}
+    lastmod: 1763672998359
+    events:
+      - eventKey: OnRoomStart
+        code: |-
+          this.score = 0;
+          this.lives = 1;
+        arguments: {}
+        lib: core
+    behaviors: []
+    uid: MRLLRj43Gbbz9M
+    extendTypes: ''
+  - lastmod: 1763338468214
+    type: texture
+    name: '20240522184411'
+    untill: 0
+    grid:
+      - 1
+      - 1
+    axis:
+      - 839.0218579234974
+      - 1010.14012490242
+    marginx: 0
+    marginy: 0
+    imgWidth: 1174
+    imgHeight: 664
+    width: 1174
+    height: 664
+    offx: 0
+    offy: 0
+    origname: inwmcppGkGgkLkt.png
+    shape: rect
+    left: 839
+    right: 335
+    top: 1010
+    bottom: -346
+    uid: nwmcppGkGgkLkt
+    padding: 1
+    isBlank: false
+    source: 'C:\Users\vhque\Downloads\Untitled design (1).png'
+    ignoreTiledUse: true
+    r: 332
+    stripPoints:
+      - x: 0
+        'y': -332
+      - x: 558
+        'y': -103
+      - x: 345
+        'y': 269
+      - x: -345
+        'y': 269
+      - x: -558
+        'y': -103
+    closedStrip: true
+  - type: style
+    name: New Style
+    uid: chpLtf1RF2Mh2N
+    typeface: -1
+    font:
+      family: sans-serif
+      halign: center
+      italic: false
+      size: 68
+      weight: '400'
+      wrap: true
+      wrapPosition: 640
+      lineHeight: 72.8
+    fill:
+      type: 0
+      color: '#ffffff'
+      color1: '#cccccc'
+      color2: '#ffffff'
+      gradtype: 1
+    lastmod: 1725660137639
+  - type: template
+    baseClass: Text
+    name: ponto
+    depth: 0
+    texture: -1
+    playAnimationOnStart: false
+    loopAnimation: true
+    animationFPS: 30
+    visible: true
+    events:
+      - eventKey: OnStep
+        lib: core
+        code: 'this.text = ''pontuação: '' +  rooms.current.score;'
+        arguments: {}
+      - eventKey: OnDraw
+        code: |-
+          if (rooms.current.lives == 0) {
+              this.y = 448;
+              this.x = 512;
+          }
+        arguments: {}
+        lib: core
+    extends:
+      cgroup: ''
+    lastmod: 1763337352980
+    uid: QLzqHC6t66JwqH
+    behaviors: []
+    extendTypes: ''
+    defaultText: ''
+    textStyle: chpLtf1RF2Mh2N
+  - type: template
+    baseClass: Text
+    name: record
+    depth: 0
+    texture: -1
+    playAnimationOnStart: false
+    loopAnimation: true
+    animationFPS: 30
+    visible: true
+    events:
+      - eventKey: OnStep
+        lib: core
+        code: >-
+          if (!('Mrecord' in localStorage)) { //guarda maior record no local
+              localStorage['Mrecord'] = rooms.current.score;
+          } else if (localStorage['Mrecord'] < rooms.current.score) {
+              localStorage['Mrecord'] = rooms.current.score;
+          }
+
+          var record = 0
+
+          if (rooms.current.score > record) { //quando ponto maior que record
+          define record
+              record = rooms.current.score;
+          }
+
+          this.text = 'record: ' + localStorage['Mrecord'];
+        arguments: {}
+      - eventKey: OnDraw
+        code: |-
+          if (rooms.current.lives == 0) {
+              this.y = 512;
+          }
+        arguments: {}
+        lib: core
+    extends:
+      cgroup: ''
+    lastmod: 1763337948083
+    uid: TGg9mGqHw2fm5b
+    behaviors: []
+    extendTypes: ''
+    defaultText: ''
+    textStyle: chpLtf1RF2Mh2N
+  - lastmod: 1725667410178
+    type: texture
+    name: button_tentar-novamente
+    untill: 0
+    grid:
+      - 1
+      - 1
+    axis:
+      - 0
+      - 0
+    marginx: 0
+    marginy: 0
+    imgWidth: 339
+    imgHeight: 66
+    width: 339
+    height: 66
+    offx: 0
+    offy: 0
+    origname: idtKt1jz1cjQwKF.png
+    shape: rect
+    left: 0
+    right: 339
+    top: 0
+    bottom: 66
+    uid: dtKt1jz1cjQwKF
+    padding: 1
+    isBlank: false
+    source: /home/kayronn/Downloads/button_tentar-novamente.png
+  - type: template
+    baseClass: AnimatedSprite
+    name: retry
+    depth: 0
+    texture: dtKt1jz1cjQwKF
+    playAnimationOnStart: false
+    loopAnimation: true
+    animationFPS: 30
+    visible: true
+    events:
+      - eventKey: OnDraw
+        code: |-
+          if (rooms.current.lives == 0) {
+              this.y = 192;
+          }
+        arguments: {}
+        lib: core
+      - eventKey: OnPointerClick
+        code: |
+          rooms.restart()//recomeçar
+        arguments: {}
+        lib: core
+    extends: {}
+    lastmod: 1725934353432
+    uid: M1qw88b1R4m44t
+    behaviors: []
+    extendTypes: ''
+  - type: room
+    oncreate: ''
+    onstep: ''
+    ondraw: ''
+    onleave: ''
+    gridX: 64
+    gridY: 64
+    diagonalGrid: false
+    disableGrid: false
+    simulate: true
+    width: 1280
+    height: 720
+    restrictCamera: false
+    restrictMaxX: 1280
+    restrictMinX: 1280
+    restrictMaxY: 720
+    restrictMinY: 720
+    isUi: false
+    name: menu
+    backgroundColor: '#000000'
+    follow: -1
+    backgrounds:
+      - depth: 0
+        texture: nwmcppGkGgkLkt
+        shiftX: 0
+        shiftY: 0
+        parallaxX: 1
+        parallaxY: 1
+        movementX: 0
+        movementY: 0
+        scaleX: 1.1
+        scaleY: 1.1
+        repeat: no-repeat
+    copies:
+      - x: 611
+        'y': -31.99999972
+        opacity: 1
+        tint: 16777215
+        scale:
+          x: 0.116
+          'y': 0.13061224
+        rotation: 0
+        uid: pCFJrFbGw5rFhC
+        exts: {}
+        customProperties: {}
+        bindings: {}
+      - x: 384
+        'y': -256
+        opacity: 0.91
+        tint: 16777215
+        scale:
+          x: 2.03636364
+          'y': 2.9090909099999998
+        rotation: 0
+        uid: BztwH95Fbr6W3b
+        exts: {}
+        customProperties: {}
+        bindings: {}
+      - x: 633.93911858
+        'y': 681.44766492
+        opacity: 1
+        tint: 16777215
+        scale:
+          x: 0.12176284
+          'y': 0.08164231
+        rotation: 0
+        uid: HKHh3gwD7cf2MB
+        exts: {}
+        customProperties: {}
+        bindings: {}
+      - x: 0
+        'y': 0
+        opacity: 1
+        tint: 16777215
+        scale:
+          x: 1
+          'y': 1
+        rotation: 0
+        uid: 7DBpH18fHqzbR3
+        exts: {}
+        customProperties: {}
+        bindings: {}
+    tiles: []
+    extends: {}
+    lastmod: 1763672998655
+    events: []
+    behaviors: []
+    extendTypes: ''
+    uid: djWQmfK9zp1jgk
+  - type: template
+    baseClass: AnimatedSprite
+    name: logo cesta
+    depth: 0
+    texture: 5jtT8HrN6QzKpc
+    playAnimationOnStart: false
+    loopAnimation: true
+    animationFPS: 30
+    visible: true
+    events:
+      - eventKey: OnStep
+        code: >-
+          this.move ()
+
+          let apple = templates.list['apple'][0]; //reconhecer o objeeto
+
+          if (this.x > apple.x) { //se x for maior que x da maça ele vai para
+          direita
+
+          this.x -= 8;
+
+          }
+
+          if (this.x < apple.x) { //se x for menor que x da maça ele vai para
+          esquerda
+              this.x += 8
+          }
+        arguments: {}
+        lib: core
+    extends:
+      cgroup: ''
+    lastmod: 1763672998727
+    uid: HKHh3gwD7cf2MB
+    behaviors: []
+    extendTypes: ''
+  - type: template
+    baseClass: AnimatedSprite
+    name: apple
+    depth: 0
+    texture: fpGkq8cnn351Gd
+    playAnimationOnStart: false
+    loopAnimation: true
+    animationFPS: 30
+    visible: true
+    events:
+      - eventKey: OnCreate
+        code: |-
+          this.timer2 = 3;
+          this.direction = 90;//direção para onde vai deslizar
+        arguments: {}
+        lib: core
+      - eventKey: collisionTemplate
+        code: |
+          this.x = random.range(65, 1216) //spawn aleatorio
+          this.y = -64
+          this.speed += 10;
+        arguments:
+          template: HKHh3gwD7cf2MB
+        lib: place
+      - eventKey: OnDraw
+        code: |
+          if (this.y > 768) {
+              this.x = random.range(65, 1216); //spawn aleatorio
+              this.y = -64;
+          }
+        arguments: {}
+        lib: core
+      - eventKey: Timer2
+        code: |-
+          this.timer2 = 3; //tempo iniciar
+          this.speed = 500; //velocidade
+          this.x = random.range(65, 1216); //spawn aleatorio
+          this.timer2 = 0; // para o tempo para não repetir
+        arguments:
+          name: ''
+          isUi: false
+        lib: core
+      - eventKey: OnStep
+        code: this.move ();
+        arguments: {}
+        lib: core
+    extends:
+      cgroup: ''
+    lastmod: 1725817326479
+    uid: pCFJrFbGw5rFhC
+    behaviors: []
+    extendTypes: ''
+  - name: maca
+    uid: Q2WJnG1GPTjm5c
+    type: sound
+    lastmod: 1725933306036
+    preload: true
+    variants:
+      - uid: 2R4c89FwCqq7qc
+        source: >-
+          /home/kayronn/Documentos/ct.js.v5.1.0.for.linux64/package.nw/bundledAssets/sounds/Kenney's
+          RPG Sounds/DropLeather.mp3
+    distortion:
+      enabled: false
+      min: 0
+      max: 1
+    pitch:
+      enabled: false
+      min: 0
+      max: 1
+    reverb:
+      enabled: false
+      decayMin: 2
+      decayMax: 2
+      secondsMin: 2
+      secondsMax: 3
+      reverse: false
+    volume:
+      enabled: false
+      min: 0
+      max: 0.92
+    eq:
+      enabled: false
+      bands:
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+    panning:
+      refDistance: 0.5
+      rolloffFactor: 1
+  - name: musica
+    uid: h8zDLF3zWg4rhR
+    type: sound
+    lastmod: 1725935340017
+    preload: true
+    variants:
+      - uid: jq4r5fFBk5qbHd
+        source: /home/kayronn/Downloads/Mineirinho Ultra Adventures_ Theme.mp3
+    distortion:
+      enabled: false
+      min: 0
+      max: 1
+    pitch:
+      enabled: false
+      min: 0
+      max: 1
+    reverb:
+      enabled: false
+      decayMin: 2
+      decayMax: 2
+      secondsMin: 2
+      secondsMax: 3
+      reverse: false
+    volume:
+      enabled: true
+      min: 0
+      max: 0.15
+    eq:
+      enabled: false
+      bands:
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+    panning:
+      refDistance: 0.5
+      rolloffFactor: 1
+  - type: template
+    baseClass: AnimatedSprite
+    name: começar
+    depth: 0
+    texture: NMMD9585DjgJW3
+    playAnimationOnStart: false
+    loopAnimation: true
+    animationFPS: 30
+    visible: true
+    events:
+      - eventKey: OnPointerClick
+        code: rooms.switch('jogo');
+        arguments: {}
+        lib: core
+      - eventKey: OnActionPress
+        code: this.y = 192;
+        arguments:
+          action: mouse
+        lib: core
+    extends:
+      cgroup: ''
+    lastmod: 1763337103182
+    uid: BztwH95Fbr6W3b
+    behaviors: []
+    extendTypes: ''
+  - lastmod: 1725930341930
+    type: texture
+    name: button_comecar
+    untill: 0
+    grid:
+      - 1
+      - 1
+    axis:
+      - 0
+      - 0
+    marginx: 0
+    marginy: 0
+    imgWidth: 220
+    imgHeight: 66
+    width: 220
+    height: 66
+    offx: 0
+    offy: 0
+    origname: iNMMD9585DjgJW3.png
+    shape: rect
+    left: 0
+    right: 220
+    top: 0
+    bottom: 66
+    uid: NMMD9585DjgJW3
+    padding: 1
+    isBlank: false
+    source: /home/kayronn/Downloads/button_comecar.png
+  - type: template
+    baseClass: AnimatedSprite
+    name: som
+    depth: 0
+    texture: 2N3RD1QP9qzz5G
+    playAnimationOnStart: false
+    loopAnimation: true
+    animationFPS: 30
+    visible: true
+    events:
+      - eventKey: OnActionPress
+        code: |-
+          this.kill = true
+          sounds.play('musica', {loop: true});
+        arguments:
+          action: mouse
+        lib: core
+    extends:
+      cgroup: ''
+    lastmod: 1763337103083
+    uid: 7DBpH18fHqzbR3
+    behaviors: []
+    extendTypes: ''
+  - lastmod: 1763337942249
+    type: texture
+    name: Placeholder
+    untill: 0
+    grid:
+      - 1
+      - 1
+    axis:
+      - 0
+      - 0
+    marginx: 0
+    marginy: 0
+    imgWidth: 1280
+    imgHeight: 720
+    width: 1280
+    height: 720
+    offx: 0
+    offy: 0
+    origname: i2N3RD1QP9qzz5G.png
+    shape: rect
+    left: 0
+    right: 1280
+    top: 0
+    bottom: 720
+    uid: 2N3RD1QP9qzz5G
+    padding: 1
+    isBlank: false
+    source: 'C:\Users\vhque\Downloads\clique para começar.png'
+  - name: isso
+    uid: pfC8jKFQzTWR1G
+    type: sound
+    lastmod: 1725933939528
+    preload: true
+    variants:
+      - uid: n7b1djCttcMrpP
+        source: /home/kayronn/Downloads/isso-ai-mineirinho.mp3
+    distortion:
+      enabled: false
+      min: 0
+      max: 1
+    pitch:
+      enabled: false
+      min: 0
+      max: 1
+    reverb:
+      enabled: false
+      decayMin: 2
+      decayMax: 2
+      secondsMin: 2
+      secondsMax: 3
+      reverse: false
+    volume:
+      enabled: false
+      min: 0
+      max: 1
+    eq:
+      enabled: false
+      bands:
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+    panning:
+      refDistance: 0.5
+      rolloffFactor: 1
+  - name: dead
+    uid: Wm7p9Mn374pNG6
+    type: sound
+    lastmod: 1725935050325
+    preload: true
+    variants:
+      - uid: dQ8M1tqcrPpJRD
+        source: /home/kayronn/Downloads/aiaiaiaiai-mineirinho.mp3
+    distortion:
+      enabled: false
+      min: 0
+      max: 1
+    pitch:
+      enabled: false
+      min: 0
+      max: 1
+    reverb:
+      enabled: false
+      decayMin: 2
+      decayMax: 2
+      secondsMin: 2
+      secondsMax: 3
+      reverse: false
+    volume:
+      enabled: true
+      min: 0
+      max: 0.24
+    eq:
+      enabled: false
+      bands:
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+        - min: -1
+          max: 1
+    panning:
+      refDistance: 0.5
+      rolloffFactor: 1
+settings:
+  authoring:
+    author: ''
+    site: ''
+    title: ''
+    version:
+      - 0
+      - 0
+      - 0
+    versionPostfix: ''
+    appId: ''
+  rendering:
+    usePixiLegacy: true
+    transparent: false
+    maxFPS: 60
+    pixelatedrender: false
+    highDensity: true
+    desktopMode: maximized
+    hideCursor: false
+    mobileScreenOrientation: unspecified
+    viewMode: scaleFit
+  export:
+    autocloseDesktop: true
+    windows: true
+    linux: true
+    mac: true
+    functionWrap: false
+    codeModifier: none
+    bundleAssetTree: false
+    bundleAssetTypes:
+      texture: true
+      template: true
+      room: true
+      behavior: false
+      font: false
+      sound: false
+      style: false
+      tandem: false
+      script: false
+      typefaces: !<tag:yaml.org,2002:js/undefined> ''
+    showErrors: true
+    errorsLink: ''
+  branding:
+    accent: '#446adb'
+    invertPreloaderScheme: true
+    icon: -1
+    splashScreen: -1
+    forceSmoothIcons: false
+    forceSmoothSplashScreen: false
+    hideLoadingLogo: false
+    alternativeLogo: false
+    customLoadingText: ''
+  fps: 30
+globalVars: []
+palette: []
