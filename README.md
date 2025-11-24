@@ -1,4 +1,4 @@
-# 🍎 Jogo da Maçã
+# 🍎 Jogo da Maçã - Grupo 18
 
 Um jogo simples criado no **CT.js**, onde o jogador controla uma cesta e deve pegar o maior número possível de maçãs que caem do céu. O objetivo é sobreviver o máximo de tempo possível sem deixar uma maçã escapar.
 
